@@ -12,17 +12,20 @@ import java.util.List;
 public class ProductRepository {
     @Autowired
     JdbcTemplate jdbcTemplate;
-    public List<Product> getAllProduct(){
+
+    public List<Product> getAllProduct() {
         String sql = "Select * from Product where deleted = 0;";
         List<Product> list = jdbcTemplate.query(sql, new ProductMapper());
         return list;
     }
-    public Product getProductById(String id){
+
+    public Product getProductById(String id) {
         String sql = "Select * from Product where productID = ? and deleted = 0;";
         Product product = (Product) jdbcTemplate.queryForObject(sql, new ProductMapper(), new Object[]{id});
         return product;
     }
-    public Boolean updateProduct(Product product){
+
+    public Boolean updateProduct(Product product) {
         String sql = "Update Product set display = ?, priceIn = ?, priceOut = ?, priceSale = ?, amount = ?, shipday = ?, description = ?, images = ?, productId = ? and deleted = 0;";
         Object values[] = new Object[9];
         values[1] = product.getDisplay();
@@ -37,7 +40,8 @@ public class ProductRepository {
         jdbcTemplate.update(sql, values);
         return true;
     }
-    public Boolean deleteProduct(String id){
+
+    public Boolean deleteProduct(String id) {
         String sql = "Delete Product where productID = ? and deleted = 0;";
         jdbcTemplate.update(sql, new Object[]{id});
         return true;

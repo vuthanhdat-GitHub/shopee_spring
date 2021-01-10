@@ -12,18 +12,24 @@ import java.util.List;
 public class ProductController {
     @Autowired
     ProductService productService;
+
     @GetMapping("/getAllProduct")
-    public List<Product> getAllProduct(){return productService.getAllProduct();}
+    public List<Product> getAllProduct() {
+        return productService.getAllProduct();
+    }
+
     @GetMapping("/getProductById")
-    public Product getProductById(String id){
+    public Product getProductById(String id) {
         return productService.getProductById(id);
     }
+
     @PutMapping("/updateProduct/{id}")
-    public Boolean updateProduct(@PathVariable("id") String id, Product product){
+    public Boolean updateProduct(@PathVariable("id") String id, Product product) {
         return productService.updateProduct(product);
     }
+
     @DeleteMapping("/deleteProduct/{id}")
-    public Boolean deleteProduct(@PathVariable("id") String id){
+    public Boolean deleteProduct(@PathVariable("id") String id) {
         return productService.deleteProduct(id);
     }
 }

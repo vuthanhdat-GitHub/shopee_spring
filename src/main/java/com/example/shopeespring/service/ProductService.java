@@ -20,21 +20,24 @@ public class ProductService {
             return null;
         }
     }
-    public Product getProductById(@RequestParam String id){
-        try{
+
+    public Product getProductById(@RequestParam String id) {
+        try {
             return productRepository.getProductById(id);
-        }catch (Exception ex){
+        } catch (Exception ex) {
             return null;
         }
     }
-    public Boolean updateProduct(Product product){
-        try{
+
+    public Boolean updateProduct(Product product) {
+        try {
             return productRepository.updateProduct(product);
-        }catch (Exception ex){
+        } catch (Exception ex) {
             return null;
         }
     }
-    public Boolean deleteProduct(String id){
+
+    public Boolean deleteProduct(String id) {
         return productRepository.deleteProduct(id);
     }
 }
