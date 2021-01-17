@@ -21,6 +21,6 @@ public class ProductMapper implements RowMapper {
         product.setShipDay(resultSet.getInt("shipday"));
         product.setDescription(resultSet.getString("description"));
         product.setImages(resultSet.getString("images"));
-        return null;
+        return product;
     }
 }

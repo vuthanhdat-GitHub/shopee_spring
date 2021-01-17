@@ -1,2 +1,7 @@
-package com.example.shopeespring.exception;public class ExceptionHandler {
+package com.example.shopeespring.exception;
+
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+@RestControllerAdvice
+public class ApiExceptionHandler {
 }

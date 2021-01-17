@@ -13,9 +13,19 @@ public class ProductController {
     @Autowired
     ProductService productService;
 
+    @GetMapping("/test-ex")
+    public Integer testException(@RequestParam Integer input) {
+        return input;
+    }
+
     @GetMapping("/getAllProduct")
     public List<Product> getAllProduct() {
         return productService.getAllProduct();
+    }
+
+    @GetMapping("/getAllProduct2")
+    public List<Product> getAllProduct2(@RequestParam String type, @RequestParam int sort) {
+        return productService.getAllProduct2(type, sort);
     }
 
     @GetMapping("/getProductById")
@@ -31,5 +41,10 @@ public class ProductController {
     @DeleteMapping("/deleteProduct/{id}")
     public Boolean deleteProduct(@PathVariable("id") String id) {
         return productService.deleteProduct(id);
+    }
+
+    @GetMapping("/getProductByDisplay")
+    public List<Product> getProductByDisplay(@RequestParam String display){
+        return productService.getProductByDisplay(display);
     }
 }

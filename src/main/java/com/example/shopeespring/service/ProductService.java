@@ -21,6 +21,14 @@ public class ProductService {
         }
     }
 
+    public List<Product> getAllProduct2(String type, int sort) {
+        try {
+            return productRepository.getAllProduct2(type, sort);
+        } catch (Exception ex) {
+            return null;
+        }
+    }
+
     public Product getProductById(@RequestParam String id) {
         try {
             return productRepository.getProductById(id);
@@ -39,5 +47,13 @@ public class ProductService {
 
     public Boolean deleteProduct(String id) {
         return productRepository.deleteProduct(id);
+    }
+
+    public List<Product> getProductByDisplay(@RequestParam String display) {
+        try {
+            return productRepository.getProductByDisplay(display);
+        } catch (Exception ex) {
+            return null;
+        }
     }
 }

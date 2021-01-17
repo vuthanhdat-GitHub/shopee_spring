@@ -19,6 +19,21 @@ public class ProductRepository {
         return list;
     }
 
+    public List<Product> getAllProduct2(String type, int sort) {
+        switch (sort) {
+            case 0:
+                String sql = "Select * from Product Order By " + type + " desc;";
+                List<Product> list = jdbcTemplate.query(sql, new ProductMapper());
+                return list;
+            case 1:
+                String sql1 = "Select * from Product Order By " + type + " asc";
+                List<Product> list1 = jdbcTemplate.query(sql1, new ProductMapper());
+                return list1;
+            default:
+                return null;
+        }
+    }
+
     public Product getProductById(String id) {
         String sql = "Select * from Product where productID = ? and deleted = 0;";
         Product product = (Product) jdbcTemplate.queryForObject(sql, new ProductMapper(), new Object[]{id});
@@ -46,4 +61,11 @@ public class ProductRepository {
         jdbcTemplate.update(sql, new Object[]{id});
         return true;
     }
+
+    public List<Product> getProductByDisplay(String display){
+        String sql = "Select * from Product where lower(display) = lower(?) and deleted = 0;";
+        Product product = (Product) jdbcTemplate.queryForObject(sql, new ProductMapper(), new Object[]{display});
+        return product;
+    }
+
 }
