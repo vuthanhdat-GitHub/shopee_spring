@@ -49,7 +49,7 @@ public class ProductService {
         return productRepository.deleteProduct(id);
     }
 
-    public List<Product> getProductByDisplay(@RequestParam String display) {
+    public Product getProductByDisplay(@RequestParam String display) {
         try {
             return productRepository.getProductByDisplay(display);
         } catch (Exception ex) {

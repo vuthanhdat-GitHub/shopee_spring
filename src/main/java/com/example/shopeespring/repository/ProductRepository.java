@@ -62,7 +62,7 @@ public class ProductRepository {
         return true;
     }
 
-    public List<Product> getProductByDisplay(String display){
+    public Product getProductByDisplay(String display){
         String sql = "Select * from Product where lower(display) = lower(?) and deleted = 0;";
         Product product = (Product) jdbcTemplate.queryForObject(sql, new ProductMapper(), new Object[]{display});
         return product;

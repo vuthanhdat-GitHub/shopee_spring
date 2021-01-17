@@ -44,7 +44,7 @@ public class ProductController {
     }
 
     @GetMapping("/getProductByDisplay")
-    public List<Product> getProductByDisplay(@RequestParam String display){
+    public Product getProductByDisplay(@RequestParam String display){
         return productService.getProductByDisplay(display);
     }
 }
