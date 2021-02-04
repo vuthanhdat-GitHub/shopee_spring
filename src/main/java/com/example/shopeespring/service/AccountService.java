@@ -40,4 +40,11 @@ public class AccountService {
     public Boolean deleteAccount(String id) {
         return accountRepository.deleteAccount(id);
     }
+    public Boolean addAccount(Account account){
+        try{
+            return accountRepository.addAccount(account);
+        }catch (Exception ex){
+            return false;
+        }
+    }
 }

@@ -34,4 +34,9 @@ public class AccountController {
     public Boolean deleteAccount(@PathVariable("id") String id) {
         return accountService.deleteAccount(id);
     }
+
+    @PostMapping ("/addAccount")
+    public Boolean addAccount(@RequestBody Account account){
+        return accountService.addAccount(account);
+    }
 }
