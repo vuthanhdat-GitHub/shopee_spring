@@ -28,9 +28,25 @@ public class ProductController {
         return productService.getAllProduct2(type, sort);
     }
 
+    @GetMapping("/getAllProduct3")
+    public List<Product> getAllProduct3(@RequestParam(required = false) Integer size, @RequestParam(required = false) Integer page){
+        if(size == null){
+            size = 10;
+        }
+        if(page == null){
+            page = 1;
+        }
+        return productService.getAllProduct3(size, page);
+    }
+
     @GetMapping("/getProductById")
     public Product getProductById(String id) {
         return productService.getProductById(id);
+    }
+
+    @GetMapping("/display")
+    public List<Product> display(@RequestParam String str){
+        return productService.display(str);
     }
 
     @PutMapping("/updateProduct/{id}")

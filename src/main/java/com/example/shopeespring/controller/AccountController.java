@@ -25,6 +25,16 @@ public class AccountController {
         return accountService.getAccountById(id);
     }
 
+    @GetMapping("/email")
+    public List<Account> email(@RequestParam String str){
+        return accountService.email(str);
+    }
+
+    @GetMapping("/display")
+    public List<Account> display(@RequestParam String str){
+        return accountService.display(str);
+    }
+
     @PutMapping("/updateAccount/{id}")
     public Boolean updateAccount(@PathVariable("id") String id, Account account) {
         return accountService.updateAccount(account);

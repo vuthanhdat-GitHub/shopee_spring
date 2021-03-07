@@ -29,6 +29,22 @@ public class AccountService {
         }
     }
 
+    public List<Account> email(String str){
+        try{
+            return accountRepository.email(str);
+        }catch (Exception ex){
+            return null;
+        }
+    }
+
+    public List<Account> display(String str){
+        try{
+            return accountRepository.display(str);
+        }catch (Exception ex){
+            return null;
+        }
+    }
+
     public Boolean updateAccount(Account account) {
         try {
             return accountRepository.updateAccount(account);

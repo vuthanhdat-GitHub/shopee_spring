@@ -29,10 +29,28 @@ public class ProductService {
         }
     }
 
+    public List<Product> getAllProduct3(Integer size, Integer page){
+        try{
+            Integer limit = size;
+            Integer offset = (page - 1) * size;
+            return productRepository.getAllProduct3(limit, offset);
+        }catch (Exception ex){
+            return null;
+        }
+    }
+
     public Product getProductById(@RequestParam String id) {
         try {
             return productRepository.getProductById(id);
         } catch (Exception ex) {
+            return null;
+        }
+    }
+
+    public List<Product> display(@RequestParam String str){
+        try{
+            return productRepository.display(str);
+        }catch (Exception ex){
             return null;
         }
     }

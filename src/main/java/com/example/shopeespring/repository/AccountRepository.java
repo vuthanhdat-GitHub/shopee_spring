@@ -26,6 +26,18 @@ public class AccountRepository {
         return account;
     }
 
+    public List<Account> email(String str){
+        String sql = "Select * from Account where deleted = 0 Order by email " + str + " ;";
+        List<Account> list = jdbcTemplate.query(sql, new AccountMapper());
+        return list;
+    }
+
+    public List<Account> display(String str){
+        String sql = "Select * from Account where deleted = 0 Order by display " + str + " ;";
+        List<Account> list = jdbcTemplate.query(sql, new AccountMapper());
+        return list;
+    }
+
     public Boolean addAccount(Account account) {
         String sql = "Insert into Account (accountID, email, display, password, role, avatar) Value (?, ?, ?, ?, ?, ?)";
         String hash = BCrypt.hashpw(account.getPassword(), BCrypt.gensalt(12));
