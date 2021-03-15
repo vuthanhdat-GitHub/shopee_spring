@@ -6,10 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.HashMap;
 import java.util.List;
-
 @Service
 public class AccountService {
+    public static int index = 0;
+    public static HashMap<Integer, Account> ListLogin = new HashMap<>();
     @Autowired
     AccountRepository accountRepository;
 
@@ -27,6 +29,22 @@ public class AccountService {
         } catch (Exception ex) {
             return null;
         }
+    }
+
+    public Account getAccountByEmailAndPassword(String email, String password){
+        return accountRepository.getAccountByEmailAndPassWord(email, password);
+    }
+
+    public int loginAccount(Account account){
+        Account acc1 = getAccountById(account.getAccountID());
+        if(acc1.getEmail().equals(account.getEmail()) && acc1.getPassword().equals(account.getPassword())){
+            ListLogin.put(index, account);
+            index++;
+            return index - 1;
+        }else{
+            System.out.println("khong dang nhap duoc");
+        }
+        return -1;
     }
 
     public List<Account> email(String str){

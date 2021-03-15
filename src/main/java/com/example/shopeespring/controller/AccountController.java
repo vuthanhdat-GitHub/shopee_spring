@@ -24,6 +24,10 @@ public class AccountController {
 
         return accountService.getAccountById(id);
     }
+    @GetMapping("/login")
+    public int login (@RequestBody Account account){
+        return accountService.loginAccount(account);
+    }
 
     @GetMapping("/email")
     public List<Account> email(@RequestParam String str){

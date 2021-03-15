@@ -4,6 +4,7 @@ import com.example.shopeespring.entity.Product;
 import com.example.shopeespring.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
@@ -14,6 +15,7 @@ public class ProductService {
     ProductRepository productRepository;
 
     public List<Product> getAllProduct() {
+
         try {
             return productRepository.getAllProduct();
         } catch (Exception ex) {
@@ -38,6 +40,8 @@ public class ProductService {
             return null;
         }
     }
+
+    //public Integer countProduct
 
     public Product getProductById(@RequestParam String id) {
         try {

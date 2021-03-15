@@ -26,6 +26,16 @@ public class AccountRepository {
         return account;
     }
 
+    public Account getAccountByEmailAndPassWord(String email, String password){
+        String sql = "Slect * from where email = ? and password = ? limit 1";
+        List<Account> res = jdbcTemplate.query(sql, new AccountMapper(), new Object[]{email, password});
+        if(res.size() == 0){
+            return null;
+        }else{
+            return res.get(0);
+        }
+    }
+
     public List<Account> email(String str){
         String sql = "Select * from Account where deleted = 0 Order by email " + str + " ;";
         List<Account> list = jdbcTemplate.query(sql, new AccountMapper());

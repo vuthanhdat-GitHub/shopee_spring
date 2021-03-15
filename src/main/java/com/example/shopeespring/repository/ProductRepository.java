@@ -24,6 +24,11 @@ public class ProductRepository {
         return jdbcTemplate.query(sql, new ProductMapper(), new Object[]{limit, offset});
     }
 
+    public Integer countProduct(){
+        String sql = "Select count(productID) from Product";
+        return jdbcTemplate.queryForObject(sql, Integer.class);
+    }
+
     public List<Product> getAllProduct2(String type, int sort) {
         switch (sort) {
             case 0:

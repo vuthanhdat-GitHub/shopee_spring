@@ -1,6 +1,7 @@
 package com.example.shopeespring.controller;
 
 import com.example.shopeespring.entity.Product;
+import com.example.shopeespring.service.AccountService;
 import com.example.shopeespring.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +20,10 @@ public class ProductController {
     }
 
     @GetMapping("/getAllProduct")
-    public List<Product> getAllProduct() {
+    public List<Product> getAllProduct(@RequestHeader int token) {
+        if(!AccountService.ListLogin.containsKey(token)){
+            return null;
+        }
         return productService.getAllProduct();
     }
 
