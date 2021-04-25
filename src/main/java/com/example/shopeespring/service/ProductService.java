@@ -1,6 +1,11 @@
 package com.example.shopeespring.service;
 
+import com.example.shopeespring.dto.GetAllProductDto;
+import com.example.shopeespring.entity.Account;
 import com.example.shopeespring.entity.Product;
+import com.example.shopeespring.exception.ApiException;
+import com.example.shopeespring.helper.jwt._decode.JwtUtil;
+import com.example.shopeespring.repository.AccountRepository;
 import com.example.shopeespring.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,9 +18,9 @@ import java.util.List;
 public class ProductService {
     @Autowired
     ProductRepository productRepository;
-
-    public List<Product> getAllProduct() {
-
+@Autowired
+AccountRepository accountRepository;
+    public  List<Product> getAllProduct() {
         try {
             return productRepository.getAllProduct();
         } catch (Exception ex) {
@@ -31,16 +36,23 @@ public class ProductService {
         }
     }
 
-    public List<Product> getAllProduct3(Integer size, Integer page){
-        try{
+    public List<Product> getAllProduct3(Integer size, Integer page) {
+        try {
             Integer limit = size;
             Integer offset = (page - 1) * size;
             return productRepository.getAllProduct3(limit, offset);
-        }catch (Exception ex){
+        } catch (Exception ex) {
             return null;
         }
     }
 
+    public GetAllProductDto getAllUseToken(String userId) throws ApiException {
+//        String userId = JwtUtil.verifyToken(token);
+        Account account = accountRepository.getAccountById(userId);
+        List<Product> products;
+        products = productRepository.getAllProduct();
+        return new GetAllProductDto(products, account);
+    }
     //public Integer countProduct
 
     public Product getProductById(@RequestParam String id) {
@@ -51,10 +63,10 @@ public class ProductService {
         }
     }
 
-    public List<Product> display(@RequestParam String str){
-        try{
+    public List<Product> display(@RequestParam String str) {
+        try {
             return productRepository.display(str);
-        }catch (Exception ex){
+        } catch (Exception ex) {
             return null;
         }
     }

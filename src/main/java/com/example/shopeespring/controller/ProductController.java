@@ -1,11 +1,15 @@
 package com.example.shopeespring.controller;
 
+import com.example.shopeespring.dto.GetAllProductDto;
 import com.example.shopeespring.entity.Product;
+import com.example.shopeespring.exception.ApiException;
 import com.example.shopeespring.service.AccountService;
 import com.example.shopeespring.service.ProductService;
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController
@@ -25,6 +29,19 @@ public class ProductController {
             return null;
         }
         return productService.getAllProduct();
+    }
+    @GetMapping("/all")
+    public GetAllProductDto getAll(@RequestParam(required = false) String type, @RequestParam(required = false) String sort, HttpServletRequest request ) throws  ApiException {
+
+        String userId = (String)request.getAttribute("user_id");
+        System.out.println(userId);
+        return productService.getAllUseToken(userId);
+    }
+
+    @SneakyThrows
+    @GetMapping("/getAllProductDto")
+    public GetAllProductDto getAllProductDto(@RequestParam String token){
+        return productService.getAllUseToken(token);
     }
 
     @GetMapping("/getAllProduct2")

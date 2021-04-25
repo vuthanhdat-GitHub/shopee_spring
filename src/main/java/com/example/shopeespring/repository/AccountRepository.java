@@ -20,20 +20,26 @@ public class AccountRepository {
         return list;
     }
 
-    public Account getAccountById(String id) {
+    public  Account getAccountById(String id) {
         String sql = "Select * from Account where accountID = ? and deleted = 0;";
         Account account = (Account) jdbcTemplate.queryForObject(sql, new AccountMapper(), new Object[]{id});
         return account;
     }
 
     public Account getAccountByEmailAndPassWord(String email, String password){
-        String sql = "Slect * from where email = ? and password = ? limit 1";
+        String sql = "Select * from where email = ? and password = ? limit 1;";
         List<Account> res = jdbcTemplate.query(sql, new AccountMapper(), new Object[]{email, password});
         if(res.size() == 0){
             return null;
         }else{
             return res.get(0);
         }
+    }
+
+    public List<Account> roleStaff(String str) {
+        String sql = " SELECT * FROM Account WHERE role = 'STAFF' AND deleted = 0 ORDER BY display " + str + " ;";
+        List<Account> list = jdbcTemplate.query(sql, new AccountMapper());
+        return list;
     }
 
     public List<Account> email(String str){
