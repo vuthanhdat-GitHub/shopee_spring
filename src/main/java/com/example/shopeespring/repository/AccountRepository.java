@@ -27,7 +27,7 @@ public class AccountRepository {
     }
 
     public Account getAccountByEmailAndPassWord(String email, String password){
-        String sql = "Select * from where email = ? and password = ? limit 1;";
+        String sql = "Select * from Account where email = ? and password = ? limit 1;";
         List<Account> res = jdbcTemplate.query(sql, new AccountMapper(), new Object[]{email, password});
         if(res.size() == 0){
             return null;

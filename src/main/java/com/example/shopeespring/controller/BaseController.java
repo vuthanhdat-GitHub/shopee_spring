@@ -17,6 +17,7 @@ public class BaseController {
     AccountService accountService;
     @ModelAttribute("BeforeRequest")
     public void getUserById(HttpServletRequest httpServletRequest) throws IOException {
+        System.out.println((String)httpServletRequest.getAttribute("user_id")+"hsfgkhgfkgfk");
         user = accountService.getAccountById((String)httpServletRequest.getAttribute("user_id"));
         System.out.println(user.toString());
     }

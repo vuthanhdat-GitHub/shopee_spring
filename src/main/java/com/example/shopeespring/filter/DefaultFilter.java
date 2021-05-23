@@ -3,6 +3,7 @@ package com.example.shopeespring.filter;
 import com.example.shopeespring.dto.InvalidTokenDto;
 import com.example.shopeespring.helper.jwt._decode.JwtUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.jsonwebtoken.Claims;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -23,9 +24,17 @@ public class DefaultFilter implements Filter {
         String token = request.getHeader("token");
 
         try {
-            String userId = JwtUtil.verifyToken(token);
-            request.setAttribute("user_id", userId);
-            filterChain.doFilter(servletRequest, servletResponse);
+            Claims claims = JwtUtil.verifyToken(token);
+            String role = (String) claims.get("role");
+            String userId = (String) claims.get("userId");
+            if (role.equals("ADMIN")) {
+                System.out.println("userrrr" + userId);
+                request.setAttribute("user_id", userId);
+                System.out.println("zzz");
+                filterChain.doFilter(request, response);
+            }else{
+                System.out.println("bug bug");
+            }
         } catch (Exception e) {
             response.setStatus(401);
             response.setContentType("application/json");

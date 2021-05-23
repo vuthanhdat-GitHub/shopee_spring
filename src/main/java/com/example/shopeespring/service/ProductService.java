@@ -28,33 +28,6 @@ AccountRepository accountRepository;
         }
     }
 
-    public List<Product> getAllProduct2(String type, int sort) {
-        try {
-            return productRepository.getAllProduct2(type, sort);
-        } catch (Exception ex) {
-            return null;
-        }
-    }
-
-    public List<Product> getAllProduct3(Integer size, Integer page) {
-        try {
-            Integer limit = size;
-            Integer offset = (page - 1) * size;
-            return productRepository.getAllProduct3(limit, offset);
-        } catch (Exception ex) {
-            return null;
-        }
-    }
-
-    public GetAllProductDto getAllUseToken(String userId) throws ApiException {
-//        String userId = JwtUtil.verifyToken(token);
-        Account account = accountRepository.getAccountById(userId);
-        List<Product> products;
-        products = productRepository.getAllProduct();
-        return new GetAllProductDto(products, account);
-    }
-    //public Integer countProduct
-
     public Product getProductById(@RequestParam String id) {
         try {
             return productRepository.getProductById(id);
@@ -62,6 +35,33 @@ AccountRepository accountRepository;
             return null;
         }
     }
+
+    public List<Product> getAllProductTypeSort(String type, int sort) {
+        try {
+            return productRepository.getAllProductTypeSort(type, sort);
+        } catch (Exception ex) {
+            return null;
+        }
+    }
+
+    public List<Product> getAllProductLimitOffset(Integer size, Integer page) {
+        try {
+            Integer limit = size;
+            Integer offset = (page - 1) * size;
+            return productRepository.getAllProductLimitOffset(limit, offset);
+        } catch (Exception ex) {
+            return null;
+        }
+    }
+
+    public GetAllProductDto getAllUseToken(String userId) throws ApiException {
+
+        Account account = accountRepository.getAccountById(userId);
+        List<Product> products;
+        products = productRepository.getAllProduct();
+        return new GetAllProductDto(products, account);
+    }
+    //public Integer countProduct
 
     public List<Product> display(@RequestParam String str) {
         try {

@@ -21,36 +21,31 @@ public class AccountController {
 
     @GetMapping("/getAccountById")
     public Account getAccountById(String id) {
-
         return accountService.getAccountById(id);
     }
-    @GetMapping("/login")
-    public int login (@RequestBody Account account){
-        return accountService.loginAccount(account);
-    }
-
-    @GetMapping("/email")
-    public List<Account> email(@RequestParam String str){
-        return accountService.email(str);
-    }
-
-    @GetMapping("/display")
-    public List<Account> display(@RequestParam String str){
-        return accountService.display(str);
-    }
-
     @PutMapping("/updateAccount/{id}")
     public Boolean updateAccount(@PathVariable("id") String id, Account account) {
         return accountService.updateAccount(account);
     }
-
     @DeleteMapping("/deleteAccount/{id}")
     public Boolean deleteAccount(@PathVariable("id") String id) {
         return accountService.deleteAccount(id);
     }
 
-    @PostMapping ("/addAccount")
-    public Boolean addAccount(@RequestBody Account account){
+    @PostMapping("/addAccount")
+    public Boolean addAccount(@RequestBody Account account) {
         return accountService.addAccount(account);
     }
+
+    @GetMapping("/email")
+    public List<Account> email(@RequestParam String str) {
+        return accountService.email(str);
+    }
+
+    @GetMapping("/display")
+    public List<Account> display(@RequestParam String str) {
+        return accountService.display(str);
+    }
+
+
 }

@@ -27,13 +27,13 @@ public class JwtUtil {
                 .compact();
         return token;
     }
-    public static String verifyToken(String token ){
+    public static Claims verifyToken(String token ){
         Claims data =  Jwts.parser()
                 .setSigningKey(DatatypeConverter.parseBase64Binary(SECRET))
                 .parseClaimsJws(token).getBody();
         // server : xac thuc token cilent gui co dung la do minh tao hay ko
         // docode body => lay ra du lieu nguoi dung
-        return data.getSubject();
+        return data;
     }
     public static Claims getAllClaimsFromToken(String token) {
         Claims claims = Jwts.parser()

@@ -19,7 +19,13 @@ public class ProductRepository {
         return list;
     }
 
-    public List<Product> getAllProduct3(Integer limit, Integer offset){
+    public Product getProductById(String id) {
+        String sql = "Select * from Product where productID = ? and deleted = 0;";
+        Product product = (Product) jdbcTemplate.queryForObject(sql, new ProductMapper(), new Object[]{id});
+        return product;
+    }
+
+    public List<Product> getAllProductLimitOffset(Integer limit, Integer offset){
         String sql = "Select * from Product limit ? offset ?";
         return jdbcTemplate.query(sql, new ProductMapper(), new Object[]{limit, offset});
     }
@@ -29,7 +35,7 @@ public class ProductRepository {
         return jdbcTemplate.queryForObject(sql, Integer.class);
     }
 
-    public List<Product> getAllProduct2(String type, int sort) {
+    public List<Product> getAllProductTypeSort(String type, int sort) {
         switch (sort) {
             case 0:
                 String sql = "Select * from Product Order By " + type + " desc;";
@@ -42,12 +48,6 @@ public class ProductRepository {
             default:
                 return null;
         }
-    }
-
-    public Product getProductById(String id) {
-        String sql = "Select * from Product where productID = ? and deleted = 0;";
-        Product product = (Product) jdbcTemplate.queryForObject(sql, new ProductMapper(), new Object[]{id});
-        return product;
     }
 
     public List<Product> display(String str){

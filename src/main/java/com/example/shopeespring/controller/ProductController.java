@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/product")
-public class ProductController {
+public class ProductController extends BaseController {
     @Autowired
     ProductService productService;
 
@@ -40,24 +40,25 @@ public class ProductController {
 
     @SneakyThrows
     @GetMapping("/getAllProductDto")
-    public GetAllProductDto getAllProductDto(@RequestParam String token){
-        return productService.getAllUseToken(token);
+    public GetAllProductDto getAllProductDto(HttpServletRequest request){
+        String userId = (String) request.getAttribute("user_id");
+        return productService.getAllUseToken(userId);
     }
 
-    @GetMapping("/getAllProduct2")
+    @GetMapping("/getAllProductTypeSort")
     public List<Product> getAllProduct2(@RequestParam String type, @RequestParam int sort) {
-        return productService.getAllProduct2(type, sort);
+        return productService.getAllProductTypeSort(type, sort);
     }
 
-    @GetMapping("/getAllProduct3")
-    public List<Product> getAllProduct3(@RequestParam(required = false) Integer size, @RequestParam(required = false) Integer page){
+    @GetMapping("/getAllProductLimitOffset")
+    public List<Product> getAllProductLimitOffset(@RequestParam(required = false) Integer size, @RequestParam(required = false) Integer page){
         if(size == null){
             size = 10;
         }
         if(page == null){
             page = 1;
         }
-        return productService.getAllProduct3(size, page);
+        return productService.getAllProductLimitOffset(size, page);
     }
 
     @GetMapping("/getProductById")
